@@ -1,55 +1,85 @@
-# Personal Portfolio - Assignment 2
+# Personal Portfolio - Assignment 3
 
 An interactive and responsive personal portfolio website built using HTML, CSS, and JavaScript.
 
-This project improves the Assignment 1 portfolio by adding dynamic project filtering, theme preferences, form validation, user feedback, and smooth visual transitions.
+This project improves the previous portfolio by adding GitHub API integration, dynamic repository loading, repository sorting, API error handling, project filtering, theme preferences, form validation, and responsive design.
 
 ## Features
 
 - **Semantic HTML5**
-  - Separate About, Projects, and Contact sections.
+  - Separate About, Projects, GitHub Repositories, and Contact sections.
+
 - **Responsive Design**
   - Uses CSS Grid and Flexbox for desktop, tablet, and mobile screens.
+
+- **GitHub API Integration**
+  - Loads public repositories from the GitHub API.
+  - Displays repository names, descriptions, stars, forks, and links.
+
+- **Repository Sorting**
+  - Sorts repositories by:
+    - Recently updated.
+    - Name.
+    - Number of stars.
+
+- **Loading and Error Handling**
+  - Displays a loading message while repositories are being loaded.
+  - Displays an error message if the API request fails.
+
 - **Dynamic Project Filtering**
   - Users can filter projects by All, Web, or API.
+
 - **Dark and Light Theme**
   - Users can switch between dark and light mode.
   - The selected theme is saved using `localStorage`.
+
 - **Contact Form Validation**
-  - Checks that all fields are completed before submission.
+  - Checks that all fields are completed.
   - Displays a success or error message without refreshing the page.
-- **User Feedback**
-  - Shows clear messages when the form is incomplete or successfully submitted.
-  - Displays a message when no projects match a selected category.
-- **Animations and Transitions**
-  - Includes hover effects on project cards, buttons, and links.
-  - Includes smooth color and movement transitions.
+
 - **Accessibility**
   - Uses labels for form inputs.
   - Includes accessible status messages using `aria-live`.
 
+- **Performance**
+  - Uses lazy loading for project images.
+  - Does not require external frameworks or build tools.
+
 ## Project Structure
 
-    ├── index.html
-    ├── README.md
-    ├── css/
-    │   └── styles.css
-    ├── js/
-    │   └── script.js
-    ├── assets/
-    │   └── images/
-    └── docs/
-        ├── ai-usage-report.md
-        └── technical-documentation.md
+```text
+├── index.html
+├── README.md
+├── css/
+│   └── styles.css
+├── js/
+│   └── script.js
+├── assets/
+│   └── images/
+└── docs/
+    ├── ai-usage-report.md
+    └── technical-documentation.md
+```
 
 ## Technologies Used
 
 - HTML5
 - CSS3
 - JavaScript
+- GitHub REST API
 - Browser `localStorage`
 - GitHub Pages
 - GitHub
+
+## GitHub API
+
+The website retrieves public repositories using the following API endpoint:
+
+```text
+https://api.github.com/users/Rimas449/repos?per_page=100
+```
+
+The repository data is loaded using JavaScript `fetch()` and `async/await`.
 
 ## Setup and How to Run Locally
 
@@ -59,6 +89,7 @@ No build tools or installations are required.
 2. Open the project folder in Visual Studio Code or another code editor.
 3. Open `index.html` in a web browser.
 4. Alternatively, use the VS Code Live Server extension.
+5. Right-click `index.html` and select **Open with Live Server**.
 
 ## How to Use the Website
 
@@ -76,26 +107,55 @@ Use the project filter buttons:
 - **Web** displays web-based projects.
 - **API** displays projects that use an API.
 
+### Sort GitHub Repositories
+
+Use the sorting dropdown in the GitHub section to sort repositories by:
+
+- Recently updated.
+- Name.
+- Number of stars.
+
 ### Submit the Contact Form
 
 Enter your name, email address, and message.
 
 If a field is empty, an error message will appear. If all fields are completed, a confirmation message will appear.
 
+## Testing
+
+The following features were tested:
+
+- Navigation links.
+- Dark and light theme switching.
+- Theme persistence after refreshing.
+- All, Web, and API project filters.
+- GitHub repository loading.
+- Repository sorting.
+- Repository links.
+- API loading and error messages.
+- Contact-form validation.
+- Contact-form success feedback.
+- Responsive mobile layout.
+- Project image loading.
+- GitHub Pages deployment.
+
 ## AI Usage
 
-AI tools were used as learning and development assistants during this assignment.
+ChatGPT was used as a learning and development assistant during this assignment.
 
-ChatGPT helped with:
+It helped with:
 
-- Planning the interactive features.
-- Suggesting JavaScript event-handling techniques.
-- Debugging and improving the project filter.
+- Planning the Assignment 3 features.
+- Adding the GitHub API integration.
+- Creating repository sorting logic.
+- Adding loading and error handling.
+- Maintaining the project filter.
 - Improving form validation and user feedback.
-- Reviewing the HTML structure and separating the Projects and Contact sections.
-- Improving the README and technical documentation.
+- Adding CSS styles for the GitHub section.
+- Updating the technical documentation and README.
+- Explaining GitHub Pages deployment and testing.
 
-All AI-generated suggestions were reviewed, edited, and tested. I made sure I understood how the HTML, CSS, and JavaScript worked before using them in the project.
+All AI-generated suggestions were reviewed, edited, and tested. I adapted the code to my existing portfolio and made sure I understood how the HTML, CSS, JavaScript, and API integration worked.
 
 Detailed information is available in:
 
@@ -106,10 +166,18 @@ Detailed information is available in:
 
 The website is deployed using GitHub Pages:
 
-https://rimas449.github.io/202337410-rimasbinotay-assignment2/
+https://rimas449.github.io/202337410-rimasbinotay-assignment3/
+
+## Repository
+
+The source code is available on GitHub:
+
+https://github.com/Rimas449/202337410-rimasbinotay-assignment3
 
 ## Author
 
 Rimas Binotay
 
 Student ID: 202337410
+
+
