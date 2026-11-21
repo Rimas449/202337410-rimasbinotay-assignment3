@@ -2,104 +2,109 @@
 
 ## 1. Project Overview
 
-This project is an interactive personal portfolio website created for Assignment 2.
+This project is an interactive personal portfolio website created for Assignment 3.
 
-It was developed using HTML5, CSS3, and JavaScript without external frameworks. The website includes About, Projects, and Contact sections.
+It was developed using HTML5, CSS3, and JavaScript without external frameworks. The website includes About, Projects, GitHub Repositories, and Contact sections.
 
-The Assignment 2 improvements include:
+Assignment 3 improvements include:
 
+- GitHub API integration.
+- Dynamic GitHub repository loading.
+- Repository sorting by name, stars, and update date.
+- Loading and error messages for API requests.
 - Dynamic project filtering.
 - Dark and light theme switching.
-- Saving the theme preference with `localStorage`.
-- Contact-form validation.
-- Success and error feedback messages.
-- Hover effects and CSS transitions.
-- Responsive design for different screen sizes.
+- Saving the selected theme with `localStorage`.
+- Contact-form validation and feedback.
+- Responsive design for mobile and desktop screens.
+- Lazy loading for project images.
 
 ## 2. Project Structure
 
-The project is organized into separate folders:
-
-- `index.html`: Contains the website structure and content.
-- `css/styles.css`: Contains the layout, colors, responsive styles, hover effects, and transitions.
-- `js/script.js`: Contains the theme toggle, project filtering, and contact-form validation.
-- `assets/images/`: Stores image assets used by the website.
-- `docs/ai-usage-report.md`: Documents how AI tools were used.
-- `docs/technical-documentation.md`: Contains the technical documentation.
-- `README.md`: Contains the project description, features, setup instructions, and AI summary.
+- `index.html`: Main website structure and content.
+- `css/styles.css`: Layout, colors, responsive styles, buttons, and animations.
+- `js/script.js`: Theme toggle, project filtering, GitHub API integration, sorting, and form validation.
+- `assets/images/`: Stores website image assets.
+- `docs/ai-usage-report.md`: Describes how AI tools were used.
+- `docs/technical-documentation.md`: Contains this technical documentation.
+- `README.md`: Contains the project description, setup instructions, features, and links.
 
 ## 3. HTML Structure
 
-The HTML file uses semantic elements, including:
+The website uses semantic HTML elements:
 
 - `header` for the navigation bar.
 - `nav` for navigation links and the theme button.
-- `main` for the primary website content.
-- `section` for the About, Projects, and Contact sections.
-- `article` for individual project cards.
+- `main` for the main page content.
+- `section` for the About, Projects, GitHub, and Contact sections.
+- `article` for project and repository cards.
 - `form` for the contact form.
 - `footer` for copyright information.
 
-The main sections are separated using these IDs:
+The main sections use these IDs:
 
 - `#about`
 - `#projects`
+- `#github-projects`
 - `#contact`
 
-The Projects section contains three filter buttons:
+The Projects section contains filter buttons:
 
 - All
 - Web
 - API
 
-Each project card includes a `data-category` attribute. For example, a web project uses `data-category="web"`.
+Each project card includes a `data-category` attribute.
 
-The Contact section contains fields for:
+The GitHub section contains:
 
-- Name
-- Email
-- Message
-
-Each input has a connected label using the `for` and `id` attributes. This improves accessibility.
+- A loading message.
+- An error message.
+- A sorting dropdown.
+- A container for dynamically generated repositories.
 
 ## 4. CSS and Responsive Design
 
 ### Theme Variables
 
-The website uses CSS custom properties for colors.
+CSS custom properties are used for the website colors.
 
-The default light-theme variables are defined under `:root`.
+The light theme is defined under `:root`.
 
-The dark-theme variables are defined under `[data-theme="dark"]`.
+The dark theme is defined under `[data-theme="dark"]`.
 
-JavaScript changes the appearance by adding or removing the `data-theme="dark"` attribute from the body.
+JavaScript adds or removes the `data-theme="dark"` attribute from the `body` element.
 
-### Responsive Layout
+### Layout
 
-The project cards use CSS Grid with an automatic responsive layout. This allows the cards to resize and wrap depending on the screen width.
+CSS Grid is used for project and repository cards:
+
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+This allows cards to resize and wrap automatically.
 
 Flexbox is used for:
 
 - The navigation bar.
-- The navigation links.
-- The contact form.
-- The project filter buttons.
+- Navigation links.
+- Contact form fields.
+- Project filter buttons.
+- GitHub repository controls.
 
-A media query is included for screens smaller than 600 pixels. It changes the navigation layout and makes the submit button easier to use on mobile devices.
+A media query for screens smaller than 600 pixels changes the navigation and GitHub controls to a mobile-friendly layout.
 
-### Animations and Transitions
+### Visual Effects
 
-Transitions are used to improve the user experience.
-
-They are applied to:
+CSS transitions and hover effects are used for:
 
 - Theme color changes.
-- Navigation link hover effects.
-- Project card hover effects.
-- Filter button hover effects.
-- Submit button hover effects.
+- Navigation links.
+- Project cards.
+- Filter buttons.
+- Submit buttons.
+- Repository links.
 
-The project cards move slightly upward when the user hovers over them. The filter buttons also change color when selected.
+Images in the project cards use lazy loading to improve page performance.
 
 ## 5. JavaScript Features
 
@@ -107,59 +112,124 @@ The project cards move slightly upward when the user hovers over them. The filte
 
 The theme button uses a click event listener.
 
-When the button is clicked:
+When clicked:
 
 1. JavaScript checks whether dark mode is active.
-2. The `data-theme="dark"` attribute is added or removed.
+2. The dark theme attribute is added or removed.
 3. The button icon changes between a moon and a sun.
-4. The selected theme is stored in `localStorage`.
+4. The selected theme is saved in `localStorage`.
 
-When the page loads, JavaScript checks `localStorage` and restores the saved theme.
+When the page loads, the saved theme is restored.
 
 ### Project Filtering
 
 The project filter uses buttons with the class `.filter-btn`.
 
-When a filter button is clicked:
+When a filter is selected:
 
 1. JavaScript reads the button's `data-filter` value.
-2. The active button receives the `active` CSS class.
-3. JavaScript checks each project's `data-category` value.
-4. Projects that match the selected category remain visible.
-5. Projects that do not match are hidden.
-6. An empty-state message appears if no projects match the filter.
+2. The selected button receives the `active` class.
+3. Each project's `data-category` value is checked.
+4. Matching projects remain visible.
+5. Non-matching projects are hidden.
+6. The empty-project message is displayed when necessary.
 
-The filtering is performed using the `hidden` property.
+### GitHub API Integration
+
+The website retrieves public repositories from the GitHub API using:
+
+    https://api.github.com/users/Rimas449/repos?per_page=100
+
+The request uses the JavaScript `fetch()` function and `async/await`.
+
+The process is:
+
+1. A loading message is displayed.
+2. JavaScript sends a request to the GitHub API.
+3. The response is checked for errors.
+4. Repository data is stored in the `repositories` array.
+5. Repository cards are created dynamically.
+6. The loading message is hidden.
+7. An error message is displayed if the request fails.
+
+Repository cards display:
+
+- Repository name.
+- Repository description.
+- Star count.
+- Fork count.
+- A link to the GitHub repository.
+
+Repository text is inserted using `textContent` to safely display API data.
+
+### Repository Sorting
+
+The sorting dropdown allows repositories to be sorted by:
+
+- Recently updated.
+- Name.
+- Stars.
+
+When the selected option changes, the repository list is sorted and rendered again.
+
+The sorting logic uses:
+
+- `localeCompare()` for repository names.
+- `stargazers_count` for stars.
+- `updated_at` dates for recently updated repositories.
 
 ### Contact Form Validation
 
 The contact form uses a submit event listener.
 
-The following steps occur when the form is submitted:
+When submitted:
 
 1. `event.preventDefault()` stops the page from refreshing.
-2. The name, email, and message values are read.
+2. The form values are read.
 3. Extra spaces are removed using `.trim()`.
-4. JavaScript checks whether all fields contain information.
+4. JavaScript checks that all fields are completed.
 5. An error message is shown if a field is empty.
-6. A success message is shown if all fields are completed.
+6. A success message is displayed if the form is valid.
 7. The form is reset after a successful submission.
 
-The feedback message uses `aria-live="polite"` so that it can also be announced by assistive technologies.
+The status message uses `aria-live="polite"` for accessibility.
 
-## 6. User Feedback and Error Handling
+## 6. State Management
 
-The website provides feedback in several situations:
+The application manages several pieces of state:
 
-- An error message appears when the contact form is incomplete.
-- A success message appears after a valid form submission.
-- A message appears if no projects match the selected category.
-- The theme button gives visual feedback by changing its icon.
-- The selected project filter is shown using a different button style.
+- The selected theme is stored in `localStorage`.
+- The loaded GitHub repositories are stored in the `repositories` array.
+- The selected project filter is represented by the active filter button.
+- The selected repository sort option is read from the sorting dropdown.
+- Loading and error states are controlled using the `hidden` property.
 
-These messages help users understand what happened and what they should do next.
+This allows the interface to update without reloading the page.
 
-## 7. How to Run the Project
+## 7. Error Handling
+
+The website handles errors in several ways:
+
+- A GitHub API error displays an error message.
+- The loading message is hidden after the request finishes.
+- The repository area is cleared if the API request fails.
+- Empty contact-form fields display an error message.
+- The empty-project message appears when no projects match a filter.
+- Browser validation checks the email input format.
+
+## 8. Performance Improvements
+
+The following performance improvements were used:
+
+- No external frameworks or libraries are required.
+- The JavaScript file is placed at the end of the HTML body.
+- Project images use `loading="lazy"`.
+- CSS variables reduce repeated styling rules.
+- Repository cards are created only after API data is loaded.
+- Reusable JavaScript functions are used for rendering and sorting.
+- The project uses a simple static structure with no build tools.
+
+## 9. How to Run the Project
 
 The project does not require build tools or external dependencies.
 
@@ -168,39 +238,48 @@ To run it locally:
 1. Clone or download the repository.
 2. Open the project folder in Visual Studio Code.
 3. Open `index.html` in a web browser.
-4. Alternatively, install the Live Server extension in Visual Studio Code.
-5. Right-click `index.html` and select Open with Live Server.
+4. Alternatively, use the Live Server extension in Visual Studio Code.
+5. Right-click `index.html` and select **Open with Live Server**.
 
-The website can also be viewed using the GitHub Pages deployment link in the README file.
+The website is also deployed using GitHub Pages.
 
-## 8. Testing
+## 10. Testing
 
-The following features should be tested:
+The following tests should be completed:
 
 - The website opens correctly.
 - Navigation links move to the correct sections.
-- The dark/light theme button changes the theme.
-- The selected theme remains after refreshing the page.
-- The All filter displays both projects.
-- The Web filter displays the web project.
-- The API filter displays the API project.
-- Empty form fields show an error message.
-- Completed form fields show a success message.
-- Project cards display correctly on mobile and desktop screens.
+- The dark/light theme button works.
+- The selected theme remains after refreshing.
+- The All filter displays all projects.
+- The Web filter displays web projects.
+- The API filter displays API projects.
+- GitHub repositories load from the API.
+- The loading message appears while repositories are loading.
+- Repository sorting works by name, stars, and update date.
+- Repository links open the correct GitHub pages.
+- The API error message appears if the request fails.
+- Empty form fields display an error message.
+- Completed form fields display a success message.
+- Project cards work on mobile and desktop screens.
 - Hover effects and transitions work correctly.
+- Images load correctly.
+- The GitHub Pages website works online.
 
-## 9. AI-Assisted Development
+## 11. AI-Assisted Development
 
 ChatGPT was used as a learning and development assistant.
 
 It helped with:
 
-- Planning the required Assignment 2 features.
-- Creating the project-filter logic.
-- Improving form validation and feedback.
-- Reviewing the HTML structure.
-- Separating the Projects and Contact sections.
-- Creating CSS styles for buttons and messages.
+- Planning Assignment 3 requirements.
+- Adding the GitHub API integration.
+- Creating repository sorting logic.
+- Improving loading and error handling.
+- Maintaining the project filter.
+- Improving contact-form validation.
+- Creating CSS styles for the new GitHub section.
 - Updating the README and documentation.
+- Explaining how to test and deploy the project.
 
-The code was reviewed, edited, and adapted to fit the existing portfolio design. The final project was not submitted as unmodified AI-generated output.
+The code was reviewed, edited, tested, and adapted to fit the existing portfolio design. The final project was not submitted as unmodified AI-generated output.
