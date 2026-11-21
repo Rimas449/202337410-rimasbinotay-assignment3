@@ -6,6 +6,7 @@ const projectCards = document.querySelectorAll(".project-card");
 const emptyProjectsMessage = document.getElementById("empty-projects");
 const formStatus = document.getElementById("form-status");
 
+
 // Select GitHub API elements
 const githubLoading = document.getElementById("github-loading");
 const githubError = document.getElementById("github-error");
