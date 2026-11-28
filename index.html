@@ -2,7 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+    name="description"
+    content="Rimas Binotay personal portfolio website"
+  />
   <title>Rimas Portfolio</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -19,7 +26,11 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
 
-      <button id="theme-toggle" aria-label="Toggle theme">
+      <button
+        id="theme-toggle"
+        aria-label="Toggle theme"
+        type="button"
+      >
         🌙
       </button>
     </nav>
@@ -45,23 +56,41 @@
     <section id="projects" class="section">
       <h2>Featured Projects</h2>
 
-      <div class="project-filters" aria-label="Filter projects">
-        <button class="filter-btn active" data-filter="all" type="button">
+      <div
+        class="project-filters"
+        aria-label="Filter projects"
+      >
+        <button
+          class="filter-btn active"
+          data-filter="all"
+          type="button"
+        >
           All
         </button>
 
-        <button class="filter-btn" data-filter="web" type="button">
+        <button
+          class="filter-btn"
+          data-filter="web"
+          type="button"
+        >
           Web
         </button>
 
-        <button class="filter-btn" data-filter="api" type="button">
+        <button
+          class="filter-btn"
+          data-filter="api"
+          type="button"
+        >
           API
         </button>
       </div>
 
       <div class="projects-grid">
 
-        <article class="project-card" data-category="web">
+        <article
+          class="project-card"
+          data-category="web"
+        >
           <img
             src="https://picsum.photos/400/250?random=1"
             alt="Student Task Manager"
@@ -79,7 +108,10 @@
           </div>
         </article>
 
-        <article class="project-card" data-category="api">
+        <article
+          class="project-card"
+          data-category="api"
+        >
           <img
             src="https://picsum.photos/400/250?random=2"
             alt="Weather Forecast Dashboard"
@@ -99,23 +131,56 @@
 
       </div>
 
-      <p id="empty-projects" class="empty-message" hidden>
+      <p
+        id="empty-projects"
+        class="empty-message"
+        hidden
+      >
         No projects found in this category.
       </p>
     </section>
 
-    <!-- GitHub repositories loaded from the GitHub API -->
-    <section id="github-projects" class="section">
+    <section
+      id="github-projects"
+      class="section"
+    >
       <h2>My GitHub Repositories</h2>
 
       <div class="github-controls">
-        <label for="github-sort">Sort repositories:</label>
 
-        <select id="github-sort">
-          <option value="updated">Recently updated</option>
-          <option value="name">Name</option>
-          <option value="stars">Stars</option>
-        </select>
+        <div class="search-control">
+          <label for="github-search">
+            Search repositories
+          </label>
+
+          <input
+            type="search"
+            id="github-search"
+            placeholder="Search by repository name or description"
+            aria-label="Search GitHub repositories"
+          />
+        </div>
+
+        <div class="sort-control">
+          <label for="github-sort">
+            Sort repositories
+          </label>
+
+          <select id="github-sort">
+            <option value="updated">
+              Recently updated
+            </option>
+
+            <option value="name">
+              Name
+            </option>
+
+            <option value="stars">
+              Stars
+            </option>
+          </select>
+        </div>
+
       </div>
 
       <p id="github-loading">
@@ -127,7 +192,16 @@
         class="form-status error"
         hidden
       >
-        Unable to load GitHub repositories. Please try again later.
+        Unable to load GitHub repositories.
+        Please try again later.
+      </p>
+
+      <p
+        id="github-empty"
+        class="empty-message"
+        hidden
+      >
+        No repositories match your search.
       </p>
 
       <div
@@ -142,7 +216,9 @@
       <form id="contact-form">
 
         <div class="form-group">
-          <label for="name">Name</label>
+          <label for="name">
+            Name
+          </label>
 
           <input
             type="text"
@@ -154,7 +230,9 @@
         </div>
 
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">
+            Email
+          </label>
 
           <input
             type="email"
@@ -166,7 +244,9 @@
         </div>
 
         <div class="form-group">
-          <label for="message">Message</label>
+          <label for="message">
+            Message
+          </label>
 
           <textarea
             id="message"
@@ -177,7 +257,10 @@
           ></textarea>
         </div>
 
-        <button type="submit" class="submit-btn">
+        <button
+          type="submit"
+          class="submit-btn"
+        >
           Send Message
         </button>
 
@@ -194,9 +277,12 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Rimas. All rights reserved.</p>
+    <p>
+      &copy; 2026 Rimas. All rights reserved.
+    </p>
   </footer>
 
   <script src="js/script.js"></script>
 </body>
 </html>
+
